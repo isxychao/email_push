@@ -46,12 +46,13 @@ for the_li in range(1, len(news_list) + 1):
         news_dict['title'] = the_title[0]
         the_list.append(news_dict)
 
-data_file = open('result.txt','a')
-for line in the_list:
-    write_str = ""
-    for k,v in line.items():
-        write_str += f"{k}:{v}\n"
-    write_str += "\n\n"
-    data_file.write(write_str)
-data_file.close()
+if len(the_list) != 0:
+    data_file = open('result.txt','a')
+    for line in the_list:
+        write_str = ""
+        for k,v in line.items():
+            write_str += f"{k}:{v}\n"
+        write_str += "\n\n"
+        data_file.write(write_str)
+    data_file.close()
 
