@@ -2,8 +2,8 @@ from lxml import etree
 import datetime
 import requests
 
-# current_date = datetime.datetime.now().strftime('%Y-%m-%d')
-current_date = "2022-08-12"
+current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+# current_date = "2022-08-12"
 root_url = "http://graschool.ahu.edu.cn/"
 
 
