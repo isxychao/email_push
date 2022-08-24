@@ -16,7 +16,7 @@ async def main():
     page = await browser.newPage()
     await page.evaluateOnNewDocument('function(){Object.defineProperty(navigator, "webdriver", {get: () => undefined})}')
 
-    await page.goto(news_url)
+    await page.goto(news_url, options={'timeout': 50000})
 
     # 等待页面加载完成
     await page.waitForNavigation()
