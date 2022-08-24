@@ -11,7 +11,7 @@ news_url =  root_url + "9577/list.htm"
 
 async def main():
     # headless参数设为False，则变成有头模式
-    browser = await launch()
+    browser = await launch(headless=True)
     
     page = await browser.newPage()
     await page.evaluateOnNewDocument('function(){Object.defineProperty(navigator, "webdriver", {get: () => undefined})}')
