@@ -11,9 +11,14 @@ jobs:
     steps:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
+        
+      - name: 'Set up Python'
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7
 
-      - name: 'Get weather report'
-        run: bash ./weather.sh
+      - name: 'get_data'
+        run: python ./get_data.py
 
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
@@ -23,7 +28,7 @@ jobs:
           username: ${{ secrets.MAILUSERNAME }}
           password: ${{ secrets.MAILPASSWORD }}
           subject: email report
-          body: file://result.html
+          body: file://result.txt
           to: isxychao@outlook.com
           from: GitHub Actions
-          content_type: text/html
+          content_type: text/plain
