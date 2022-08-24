@@ -3,8 +3,8 @@ import datetime
 import asyncio
 from pyppeteer import launch
 
-# current_date = datetime.datetime.now().strftime('%Y-%m-%d')
-current_date = "2022-08-12"
+current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+# current_date = "2022-08-12"
 root_url = "http://graschool.ahu.edu.cn/"
 
 news_url =  root_url + "9577/list.htm"
