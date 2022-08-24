@@ -22,6 +22,6 @@ steps:
       password: ${{ secrets.MAILPASSWORD }}
       subject: Shanghai Weather Report
       body: file://result.html
-      to: yifeng.ruan@gmail.com
+      to: isxychao@outlook.com
       from: GitHub Actions
       content_type: text/html
