@@ -32,14 +32,13 @@ async def main():
     the_list = []
     
     date_file = open('news_date.txt','r+', encoding='utf-8')
-    readlines = date_file.readlines()
+    readline = date_file.readline().strip('\n')
     date_file.truncate(0)
 
-    if len(readlines) == 0:
+    if len(readline) == 0:
         save_date = '1999-01-01'
     else:
-        
-        save_date = readlines[0].strip('\n').split(' ')[1]
+        save_date = readline.split(' ')[1]
     
     save_date = datetime.strptime(save_date, format_pattern)
     latest_date = save_date
