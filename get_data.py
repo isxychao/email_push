@@ -62,7 +62,7 @@ async def main():
     date_file.close()
     
     if len(the_list) != 0:
-        result_file = open('result.txt','a+', encoding='utf-8')
+        result_file = open('result.txt','w', encoding='utf-8')
         for line in the_list:
             write_str = ""
             for k,v in line.items():
