@@ -61,15 +61,18 @@ async def main():
     date_file.write(write_str)
     date_file.close()
     
+    result_file = open('result.txt','w', encoding='utf-8')
     if len(the_list) != 0:
-        result_file = open('result.txt','w', encoding='utf-8')
         for line in the_list:
             write_str = ""
             for k,v in line.items():
                 write_str += f"{k}:{v}\n"
             write_str += "\n\n"
             result_file.write(write_str)
-        result_file.close()
+    else:
+        write_str = "没有最新的新闻"
+        result_file.write(write_str)
+    result_file.close()
     
     # 关闭浏览器
     await browser.close()
