@@ -17,13 +17,9 @@ jobs:
         with:
           python-version: 3.8
          
-      - name: 'install pip packages'
-        run: |
-          python -m pip install --upgrade pip
-          pip3 install -r requirements.txt
 
-      - name: 'get_data'
-        run: python ./get_data.py
+      - name: 'run start.sh'
+        run: bash start.sh
 
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
@@ -37,3 +33,9 @@ jobs:
           to: isxychao@outlook.com
           from: GitHub Actions
           content_type: text/plain
+       
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: $\{{ secrets.GITHUB_TOKEN }}
+          branch: main
