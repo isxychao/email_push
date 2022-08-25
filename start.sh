@@ -10,7 +10,7 @@ hour=`date +%H`
 now=$year-$month-$day-$hour
 
 
-git config --global user.email ""
+git config --global user.email "isxychao@outlook.com"
 git config --global user.name "actioner"
 
 git add .
