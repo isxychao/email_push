@@ -38,7 +38,8 @@ async def main():
     if len(readlines) == 0:
         save_date = '1999-01-01'
     else:
-        save_date = readlines[0].split(' ')[1]
+        
+        save_date = readlines[0].strip('\n').split(' ')[1]
     
     save_date = datetime.strptime(save_date, format_pattern)
     latest_date = save_date
