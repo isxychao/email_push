@@ -3,3 +3,4 @@ requests
 datetime
 pyppeteer
 asyncio
+pandas
