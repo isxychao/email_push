@@ -2,11 +2,8 @@ from lxml import etree
 from datetime import datetime
 import asyncio
 from pyppeteer import launch
+import pandas as pd
 
-format_pattern = '%Y-%m-%d'
-
-# current_date = datetime.now().strftime('%Y-%m-%d')
-# current_date = "2022-08-12"
 root_url = "http://graschool.ahu.edu.cn/"
 
 news_url =  root_url + "9577/list.htm"
@@ -28,42 +25,33 @@ async def main():
     # 将结果集的文本转化为树的结构
     tree = etree.HTML(await page.content())
     
-    news_list =  tree.xpath("""//*[@id="wp_news_w1205"]/ul/li""")
-    the_list = []
+    the_list =  tree.xpath("""//*[@id="wp_news_w1205"]/ul/li""")
+    news_list = []
     
-    date_file = open('news_date.txt','r+', encoding='utf-8')
-    readline = date_file.readline().strip('\n')
-    date_file.truncate(0)
 
-    if len(readline) == 0:
-        save_date = '1999-01-01'
-    else:
-        save_date = readline.split(' ')[1]
-    
-    save_date = datetime.strptime(save_date, format_pattern)
-    latest_date = save_date
-    
-    for the_li in range(1, len(news_list) + 1):
-        news_date = tree.xpath(f"""//*[@id="wp_news_w1205"]/ul/li[{the_li}]/div[2]/span/text()""")
-        news_date_st = datetime.strptime(news_date[0], format_pattern)
-        if (news_date_st - save_date).days > 0:
-            if (news_date_st - latest_date).days > 0:
-                latest_date = news_date_st
+    df = pd.read_csv('news.csv')
+
+    for the_li in range(1, len(the_list) + 1):
+        the_title = tree.xpath(f"""//*[@id="wp_news_w1205"]/ul/li[{the_li}]/div[1]/span[2]/a/text()""")
+        the_date = tree.xpath(f"""//*[@id="wp_news_w1205"]/ul/li[{the_li}]/div[2]/span/text()""")
+        the_url = tree.xpath(f"""//*[@id="wp_news_w1205"]/ul/li[{the_li}]/div[1]/span[2]/a/@href""")
+
+        result_df = df[df.title == the_title[0]].date == the_date[0]
+        if len(result_df) == 0 or result_df.tolist()[0] == False:
             news_dict = {}
-            the_url = tree.xpath(f"""//*[@id="wp_news_w1205"]/ul/li[{the_li}]/div[1]/span[2]/a/@href""")
-            the_title = tree.xpath(f"""//*[@id="wp_news_w1205"]/ul/li[{the_li}]/div[1]/span[2]/a/text()""")
             news_dict['url'] = root_url + the_url[0]
             news_dict['title'] = the_title[0]
-            the_list.append(news_dict)
-    write_str = f"latest_data {datetime.strftime(latest_date, format_pattern)}"
+            news_dict['date'] = the_date[0]
+            news_list.append(news_dict)
 
-
-    date_file.write(write_str)
-    date_file.close()
+    
+    df = df.append(news_list)
+    df.to_csv("news.csv",index=0)
+            
     
     result_file = open('result.txt','w', encoding='utf-8')
-    if len(the_list) != 0:
-        for line in the_list:
+    if len(news_list) != 0:
+        for line in news_list:
             write_str = ""
             for k,v in line.items():
                 write_str += f"{k}:{v}\n"
