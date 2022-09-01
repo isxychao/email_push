@@ -45,7 +45,7 @@ async def main():
             news_list.append(news_dict)
 
     
-    df = df.append(news_list)
+    df = pd.concat([df,pd.DataFrame(news_list)], ignore_index=True)
     df.to_csv("news.csv",index=0)
             
     
