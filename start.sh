@@ -1,9 +1,9 @@
 python -m pip install --upgrade pip
 pip3 install -r requirements.txt
 
-echo "Start scraping data"
+echo "Scraping data"
 python3 ./get_data.py
-echo "Done"
+echo "Scraping data Done"
 
 year=`date +%Y `
 month=`date +%m `
@@ -14,9 +14,9 @@ now=$year-$month-$day-$hour
 echo "Sending Email"
 git config --global user.email "isxychao@outlook.com"
 git config --global user.name "actioner"
-echo "Done"
+echo "Sending Email Done"
 
 echo "Pushing to github"
 git add .
 git commit -m "$now"
-echo "Done"
+echo "Pushing to github Done"
