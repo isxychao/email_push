@@ -8,7 +8,7 @@ root_url = "http://graschool.ahu.edu.cn/"
 
 news_url =  root_url + "9577/list.htm"
 
-current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+current_date = datetime.now().strftime('%Y-%m-%d')
 
 async def main():
     # headless参数设为False，则变成有头模式
