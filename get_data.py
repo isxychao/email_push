@@ -20,7 +20,7 @@ async def main():
     await page.goto(news_url, options={'timeout': 50000})
 
     # 等待页面加载完成
-    await page.waitForNavigation()
+    await page.waitForNavigation({'timeout': 1000*60*2})
 
     cookies = await page.cookies()
 
