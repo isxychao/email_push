@@ -8,6 +8,8 @@ root_url = "http://graschool.ahu.edu.cn/"
 
 news_url =  root_url + "9577/list.htm"
 
+current_date = datetime.datetime.now().strftime('%Y-%m-%d')
+
 async def main():
     # headless参数设为False，则变成有头模式
     browser = await launch(headless=True)
@@ -42,6 +44,7 @@ async def main():
             news_dict['url'] = root_url + the_url[0]
             news_dict['title'] = the_title[0]
             news_dict['date'] = the_date[0]
+            news_dict['add_date'] = current_date
             news_list.append(news_dict)
 
     
